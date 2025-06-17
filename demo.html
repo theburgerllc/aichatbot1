@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive AI Chatbot Demo - See Results in 2 Minutes</title>
+    <meta name="description" content="Experience our AI chatbots in action. Industry-specific demos showing real results and ROI.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="demo-styles.css">
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+</head>
+<body class="demo-page">
+    
+    <!-- Demo Hub - Entry Point -->
+    <div class="demo-hub" id="demoHub">
+        <div class="demo-hub-container">
+            <div class="demo-hub-header">
+                <div class="back-button">
+                    <a href="/" data-gtm="demo_back_to_home">← Back to Home</a>
+                </div>
+                <div class="social-proof-count">
+                    <span class="viewers-count" id="viewersCount">847</span> people watching demos right now
+                </div>
+            </div>
+            
+            <div class="demo-hub-content">
+                <h1>See AI Chatbots Transform Your Business</h1>
+                <p class="demo-hub-subtitle">Choose your industry for a personalized 2-minute experience</p>
+                
+                <!-- Industry Demo Cards -->
+                <div class="demo-options">
+                    <div class="demo-card healthcare-card" data-industry="healthcare" data-gtm="demo_card_healthcare">
+                        <div class="demo-card-preview">
+                            <div class="preview-animation healthcare-preview">
+                                <div class="chat-bubble">
+                                    <span>Schedule appointment?</span>
+                                </div>
+                                <div class="metrics-mini">
+                                    <span>73% faster</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="demo-card-content">
+                            <h3>Healthcare Demo</h3>
+                            <p>HIPAA-compliant patient communication and appointment scheduling</p>
+                            <div class="demo-stats">
+                                <span class="stat">
+                                    <strong>$43K</strong> monthly savings
+                                </span>
+                                <span class="stat">
+                                    <strong>73%</strong> faster service
+                                </span>
+                            </div>
+                            <button class="demo-card-btn">Start Healthcare Demo</button>
+                            <div class="demo-details">
+                                <span class="demo-duration">⏱ 2 minutes</span>
+                                <span class="demo-completion">✓ 15 steps</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-card legal-card" data-industry="legal" data-gtm="demo_card_legal">
+                        <div class="demo-card-preview">
+                            <div class="preview-animation legal-preview">
+                                <div class="chat-bubble">
+                                    <span>Consultation available?</span>
+                                </div>
+                                <div class="metrics-mini">
+                                    <span>35% more leads</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="demo-card-content">
+                            <h3>Legal Practice Demo</h3>
+                            <p>Convert more leads with 24/7 consultation scheduling</p>
+                            <div class="demo-stats">
+                                <span class="stat">
+                                    <strong>35%</strong> more conversions
+                                </span>
+                                <span class="stat">
+                                    <strong>24/7</strong> availability
+                                </span>
+                            </div>
+                            <button class="demo-card-btn">Start Legal Demo</button>
+                            <div class="demo-details">
+                                <span class="demo-duration">⏱ 2 minutes</span>
+                                <span class="demo-completion">✓ 15 steps</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-card ecommerce-card" data-industry="ecommerce" data-gtm="demo_card_ecommerce">
+                        <div class="demo-card-preview">
+                            <div class="preview-animation ecommerce-preview">
+                                <div class="chat-bubble">
+                                    <span>Need help with order?</span>
+                                </div>
+                                <div class="metrics-mini">
+                                    <span>$32K recovered</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="demo-card-content">
+                            <h3>E-commerce Demo</h3>
+                            <p>Recover abandoned carts and increase customer satisfaction</p>
+                            <div class="demo-stats">
+                                <span class="stat">
+                                    <strong>$32K</strong> monthly recovery
+                                </span>
+                                <span class="stat">
+                                    <strong>45%</strong> higher satisfaction
+                                </span>
+                            </div>
+                            <button class="demo-card-btn">Start E-commerce Demo</button>
+                            <div class="demo-details">
+                                <span class="demo-duration">⏱ 2 minutes</span>
+                                <span class="demo-completion">✓ 15 steps</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Demo Format Selector -->
+                <div class="demo-format-selector">
+                    <div class="format-option selected" data-format="interactive" data-gtm="demo_format_interactive">
+                        <div class="format-icon">🎮</div>
+                        <span>Interactive Demo</span>
+                        <small>Hands-on experience</small>
+                    </div>
+                    <div class="format-option" data-format="video" data-gtm="demo_format_video">
+                        <div class="format-icon">🎥</div>
+                        <span>Video Overview</span>
+                        <small>Watch & learn</small>
+                    </div>
+                    <div class="format-option" data-format="sandbox" data-gtm="demo_format_sandbox">
+                        <div class="format-icon">🔧</div>
+                        <span>Live Sandbox</span>
+                        <small>Build your own</small>
+                    </div>
+                </div>
+                
+                <!-- Trust Indicators -->
+                <div class="demo-trust-bar">
+                    <div class="trust-indicator">
+                        <span class="trust-icon">🛡️</span>
+                        <span>SOC2 Certified</span>
+                    </div>
+                    <div class="trust-indicator">
+                        <span class="trust-icon">⚡</span>
+                        <span>No Installation Required</span>
+                    </div>
+                    <div class="trust-indicator">
+                        <span class="trust-icon">📱</span>
+                        <span>Works on Any Device</span>
+                    </div>
+                    <div class="trust-indicator">
+                        <span class="trust-icon">🎯</span>
+                        <span>Real Data Scenarios</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Interactive Demo Player -->
+    <div class="demo-player" id="demoPlayer" style="display: none;">
+        <!-- Demo Header -->
+        <div class="demo-header">
+            <div class="demo-header-left">
+                <button class="demo-back-btn" id="backToHub" data-gtm="demo_back_to_hub">← Back to Demos</button>
+                <div class="demo-industry-badge" id="industryBadge"></div>
+            </div>
+            <div class="demo-header-center">
+                <div class="demo-progress-container">
+                    <div class="demo-progress">
+                        <div class="progress-bar" id="progressBar" style="width: 6.67%"></div>
+                        <div class="progress-steps">
+                            <div class="progress-step active" data-step="1"></div>
+                            <div class="progress-step" data-step="2"></div>
+                            <div class="progress-step" data-step="3"></div>
+                            <div class="progress-step" data-step="4"></div>
+                            <div class="progress-step" data-step="5"></div>
+                            <div class="progress-step" data-step="6"></div>
+                            <div class="progress-step" data-step="7"></div>
+                            <div class="progress-step" data-step="8"></div>
+                            <div class="progress-step" data-step="9"></div>
+                            <div class="progress-step" data-step="10"></div>
+                            <div class="progress-step" data-step="11"></div>
+                            <div class="progress-step" data-step="12"></div>
+                            <div class="progress-step" data-step="13"></div>
+                            <div class="progress-step" data-step="14"></div>
+                            <div class="progress-step" data-step="15"></div>
+                        </div>
+                    </div>
+                    <div class="demo-meta">
+                        <span class="step-counter" id="stepCounter">Step 1 of 15</span>
+                        <span class="time-remaining" id="timeRemaining">2 min remaining</span>
+                    </div>
+                </div>
+            </div>
+            <div class="demo-header-right">
+                <button class="skip-demo-btn" id="skipDemo" data-gtm="demo_skip">Skip to Results →</button>
+                <button class="demo-help-btn" id="demoHelp" data-gtm="demo_help">?</button>
+            </div>
+        </div>
+        
+        <!-- Demo Stage -->
+        <div class="demo-stage" id="demoStage">
+            <!-- Demo steps will be dynamically generated here -->
+        </div>
+        
+        <!-- Demo Sidebar -->
+        <div class="demo-sidebar" id="demoSidebar">
+            <div class="demo-chat-widget">
+                <div class="chat-header">
+                    <div class="chat-avatar">👨‍💼</div>
+                    <div class="chat-info">
+                        <strong>Demo Expert</strong>
+                        <span>Available now</span>
+                    </div>
+                </div>
+                <div class="chat-message">
+                    <p>Questions about what you're seeing? I'm here to help!</p>
+                </div>
+                <button class="chat-start-btn" data-gtm="demo_chat_expert">Chat with Expert</button>
+            </div>
+            
+            <div class="demo-share-widget">
+                <h4>Share with Your Team</h4>
+                <p>Send this demo to colleagues</p>
+                <button class="share-btn" data-gtm="demo_share">Get Shareable Link</button>
+            </div>
+            
+            <div class="demo-urgency-widget" id="urgencyWidget">
+                <div class="urgency-icon">⏰</div>
+                <div class="urgency-content">
+                    <strong>Limited Time Offer</strong>
+                    <p>Get 25% off if you start trial today</p>
+                    <div class="countdown-timer" id="countdownTimer">23:47:12</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Demo Completion Modal -->
+    <div class="demo-completion-modal" id="completionModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="completion-header">
+                <h2>🎉 Demo Complete!</h2>
+                <p>You've seen how AI chatbots can transform your business</p>
+            </div>
+            
+            <div class="completion-results" id="completionResults">
+                <!-- Results will be populated dynamically -->
+            </div>
+            
+            <div class="completion-ctas">
+                <button class="cta-primary" id="startTrialCta" data-gtm="demo_complete_trial">Start My Free Trial</button>
+                <button class="cta-secondary" id="calculateSavingsCta" data-gtm="demo_complete_calculator">Calculate Exact Savings</button>
+                <button class="cta-tertiary" id="emailDemoCta" data-gtm="demo_complete_email">Email Me This Demo</button>
+            </div>
+            
+            <div class="completion-certificate">
+                <button class="certificate-btn" id="generateCertificate" data-gtm="demo_certificate">
+                    📜 Generate Completion Certificate
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Touch Controls -->
+    <div class="mobile-touch-controls" id="touchControls">
+        <div class="touch-hint">
+            <span>👈 Swipe to navigate</span>
+        </div>
+        <div class="touch-buttons">
+            <button class="touch-prev" id="touchPrev">←</button>
+            <button class="touch-next" id="touchNext">→</button>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="analytics-tracking.js"></script>
+    <script src="script.js"></script>
+    <script src="demo-script.js"></script>
+</body>
+</html>

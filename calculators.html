@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROI Calculator - Calculate Your AI Chatbot Savings</title>
+    <meta name="description" content="Calculate your exact ROI from AI chatbots. See monthly savings, cost reduction, and payback period in 30 seconds.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="calculator-styles.css">
+    
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+</head>
+<body class="calculator-page">
+    
+    <!-- Calculator Hub -->
+    <div class="calculator-hub" id="calculatorHub">
+        <div class="calculator-hub-container">
+            <div class="hub-header">
+                <div class="back-button">
+                    <a href="/" data-gtm="calculator_back_to_home">← Back to Home</a>
+                </div>
+                <div class="social-proof">
+                    <span class="calc-users">12,847</span> businesses calculated ROI this month
+                </div>
+            </div>
+            
+            <div class="hub-content">
+                <h1>Calculate Your ROI in 30 Seconds</h1>
+                <p class="hub-subtitle">See your exact monthly savings with AI chatbots. No email required to start.</p>
+                
+                <!-- Industry Calculator Selection -->
+                <div class="calculator-options">
+                    <div class="calc-card healthcare-calc" data-industry="healthcare" data-gtm="calculator_healthcare_selected">
+                        <div class="calc-icon">🏥</div>
+                        <h3>Healthcare Practice</h3>
+                        <p>Patient scheduling, insurance verification, appointment reminders</p>
+                        <div class="calc-preview">
+                            <span class="preview-metric">Average Savings: <strong>$43,702/mo</strong></span>
+                        </div>
+                        <button class="calc-start-btn">Calculate Healthcare ROI</button>
+                    </div>
+                    
+                    <div class="calc-card legal-calc" data-industry="legal" data-gtm="calculator_legal_selected">
+                        <div class="calc-icon">⚖️</div>
+                        <h3>Legal Practice</h3>
+                        <p>Lead qualification, consultation scheduling, case intake</p>
+                        <div class="calc-preview">
+                            <span class="preview-metric">Average Growth: <strong>$67,500/mo</strong></span>
+                        </div>
+                        <button class="calc-start-btn">Calculate Legal ROI</button>
+                    </div>
+                    
+                    <div class="calc-card ecommerce-calc" data-industry="ecommerce" data-gtm="calculator_ecommerce_selected">
+                        <div class="calc-icon">🛒</div>
+                        <h3>E-commerce Store</h3>
+                        <p>Cart recovery, customer support, order tracking</p>
+                        <div class="calc-preview">
+                            <span class="preview-metric">Average Recovery: <strong>$32,000/mo</strong></span>
+                        </div>
+                        <button class="calc-start-btn">Calculate E-commerce ROI</button>
+                    </div>
+                </div>
+                
+                <!-- Trust Indicators -->
+                <div class="calc-trust-bar">
+                    <div class="trust-item">
+                        <span class="trust-icon">🔒</span>
+                        <span>No Email Required</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">⏱️</span>
+                        <span>30 Second Results</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">🎯</span>
+                        <span>Industry-Specific</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">📊</span>
+                        <span>Real Data Sources</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Healthcare ROI Calculator -->
+    <div class="roi-calculator healthcare-calculator" id="healthcare-calc" style="display: none;">
+        <div class="calc-container">
+            <div class="calc-header">
+                <button class="calc-back-btn" onclick="showCalculatorHub()" data-gtm="calculator_back_to_hub">← Choose Different Industry</button>
+                <div class="calc-progress">
+                    <div class="progress-step active">1</div>
+                    <div class="progress-step">2</div>
+                    <div class="progress-step">3</div>
+                    <span class="progress-text">Step 1 of 3</span>
+                </div>
+            </div>
+            
+            <div class="calc-content">
+                <div class="calc-left">
+                    <h2>Healthcare Practice ROI Calculator</h2>
+                    <p class="calc-subhead">Takes 30 seconds • See instant results</p>
+                    
+                    <div class="calc-inputs">
+                        <!-- Input 1: Providers -->
+                        <div class="input-group">
+                            <label for="healthcare-providers">Number of Providers</label>
+                            <div class="range-input">
+                                <input type="range" min="1" max="50" value="5" id="healthcare-providers" data-gtm="calc_healthcare_providers">
+                                <div class="range-labels">
+                                    <span>1</span>
+                                    <span>50+</span>
+                                </div>
+                            </div>
+                            <div class="value-display">
+                                <span class="current-value">5</span>
+                                <span class="value-label">providers</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Input 2: Patients -->
+                        <div class="input-group">
+                            <label for="healthcare-patients">Patients per Day</label>
+                            <div class="range-input">
+                                <input type="range" min="20" max="200" value="60" id="healthcare-patients" data-gtm="calc_healthcare_patients">
+                                <div class="range-labels">
+                                    <span>20</span>
+                                    <span>200+</span>
+                                </div>
+                            </div>
+                            <div class="value-display">
+                                <span class="current-value">60</span>
+                                <span class="value-label">patients/day</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Input 3: Location (Auto-detected) -->
+                        <div class="input-group">
+                            <label for="healthcare-location">Your Location</label>
+                            <div class="location-input">
+                                <select id="healthcare-location" data-gtm="calc_healthcare_location">
+                                    <option value="CA">California</option>
+                                    <option value="NY">New York</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="OTHER">Other</option>
+                                </select>
+                                <span class="wage-rate" id="healthcare-wage-rate">Avg wage: $25/hr</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calc-right">
+                    <!-- Instant Results -->
+                    <div class="calc-results">
+                        <div class="results-header">
+                            <h3>Your Monthly Savings</h3>
+                            <div class="confidence-badge">95% Accuracy</div>
+                        </div>
+                        
+                        <div class="primary-result">
+                            <span class="currency">$</span>
+                            <span class="amount" id="healthcare-amount">43,702</span>
+                            <span class="period">/month</span>
+                        </div>
+                        
+                        <div class="result-breakdown">
+                            <div class="breakdown-item">
+                                <span class="label">Hours Saved Monthly</span>
+                                <span class="value" id="healthcare-hours">1,748</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="label">Calls Automated</span>
+                                <span class="value" id="healthcare-calls">4,200</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="label">ROI Period</span>
+                                <span class="value" id="healthcare-roi-period">6 weeks</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Visual Chart -->
+                        <div class="savings-chart-container">
+                            <canvas id="healthcare-savings-chart"></canvas>
+                        </div>
+                        
+                        <!-- Industry Benchmark -->
+                        <div class="benchmark-comparison">
+                            <h4>Your savings vs. industry average</h4>
+                            <div class="comparison-bars">
+                                <div class="comparison-bar your-bar">
+                                    <div class="bar-fill" style="width: 85%"></div>
+                                    <span class="bar-label">You: $<span id="healthcare-your-savings">43,702</span></span>
+                                </div>
+                                <div class="comparison-bar avg-bar">
+                                    <div class="bar-fill avg-fill" style="width: 60%"></div>
+                                    <span class="bar-label">Industry Avg: $31,250</span>
+                                </div>
+                            </div>
+                            <p class="benchmark-note">You save 40% more than average</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Email Capture (Shown after engagement) -->
+            <div class="email-capture" id="healthcare-email-capture" style="display: none;">
+                <div class="email-capture-content">
+                    <h3>Get Your Detailed ROI Report</h3>
+                    <p>12-month projections, implementation timeline, and competitor analysis</p>
+                    <form class="roi-email-form" onsubmit="submitEmailCapture(event, 'healthcare')">
+                        <div class="email-input-group">
+                            <input type="email" placeholder="your@email.com" required data-gtm="calc_healthcare_email">
+                            <button type="submit">Send My Report</button>
+                        </div>
+                    </form>
+                    <p class="privacy-note">📧 Detailed report + implementation tips. Unsubscribe anytime.</p>
+                </div>
+            </div>
+            
+            <!-- Conversion CTAs -->
+            <div class="calc-ctas">
+                <button class="primary-cta" onclick="startTrial('healthcare')" data-gtm="calc_healthcare_trial">Start Saving Now - Free Trial</button>
+                <button class="secondary-cta" onclick="scheduleConsultation('healthcare')" data-gtm="calc_healthcare_consultation">Schedule ROI Consultation</button>
+                <div class="urgency-text">
+                    <span class="urgency-icon">🔥</span>
+                    <span>Join <strong>847 practices</strong> saving this month</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Legal ROI Calculator -->
+    <div class="roi-calculator legal-calculator" id="legal-calc" style="display: none;">
+        <div class="calc-container">
+            <div class="calc-header">
+                <button class="calc-back-btn" onclick="showCalculatorHub()" data-gtm="calculator_back_to_hub">← Choose Different Industry</button>
+                <div class="calc-progress">
+                    <div class="progress-step active">1</div>
+                    <div class="progress-step">2</div>
+                    <div class="progress-step">3</div>
+                    <span class="progress-text">Step 1 of 3</span>
+                </div>
+            </div>
+            
+            <div class="calc-content">
+                <div class="calc-left">
+                    <h2>Legal Practice Growth Calculator</h2>
+                    <p class="calc-subhead">Calculate additional revenue from faster lead response</p>
+                    
+                    <div class="calc-inputs">
+                        <!-- Input 1: Monthly Leads -->
+                        <div class="input-group">
+                            <label for="legal-leads">Monthly Leads</label>
+                            <div class="range-input">
+                                <input type="range" min="10" max="500" value="80" id="legal-leads" data-gtm="calc_legal_leads">
+                                <div class="range-labels">
+                                    <span>10</span>
+                                    <span>500+</span>
+                                </div>
+                            </div>
+                            <div class="value-display">
+                                <span class="current-value">80</span>
+                                <span class="value-label">leads/month</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Input 2: Current Conversion Rate -->
+                        <div class="input-group">
+                            <label for="legal-conversion">Current Conversion Rate</label>
+                            <div class="range-input">
+                                <input type="range" min="5" max="40" value="15" id="legal-conversion" data-gtm="calc_legal_conversion">
+                                <div class="range-labels">
+                                    <span>5%</span>
+                                    <span>40%</span>
+                                </div>
+                            </div>
+                            <div class="value-display">
+                                <span class="current-value">15</span>
+                                <span class="value-label">% conversion</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Input 3: Average Case Value -->
+                        <div class="input-group">
+                            <label for="legal-case-value">Average Case Value</label>
+                            <div class="range-input">
+                                <input type="range" min="5000" max="100000" value="25000" step="1000" id="legal-case-value" data-gtm="calc_legal_case_value">
+                                <div class="range-labels">
+                                    <span>$5K</span>
+                                    <span>$100K+</span>
+                                </div>
+                            </div>
+                            <div class="value-display">
+                                <span class="currency-symbol">$</span>
+                                <span class="current-value">25,000</span>
+                                <span class="value-label">per case</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Input 4: Practice Type -->
+                        <div class="input-group">
+                            <label for="legal-type">Practice Type</label>
+                            <select id="legal-type" data-gtm="calc_legal_type">
+                                <option value="personal_injury">Personal Injury</option>
+                                <option value="family_law">Family Law</option>
+                                <option value="criminal_defense">Criminal Defense</option>
+                                <option value="business_law">Business Law</option>
+                                <option value="estate_planning">Estate Planning</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calc-right">
+                    <div class="calc-results">
+                        <div class="results-header">
+                            <h3>Your Monthly Revenue Growth</h3>
+                            <div class="confidence-badge">Based on 623 Law Firms</div>
+                        </div>
+                        
+                        <div class="primary-result">
+                            <span class="currency">$</span>
+                            <span class="amount" id="legal-amount">67,500</span>
+                            <span class="period">/month</span>
+                        </div>
+                        
+                        <div class="result-breakdown">
+                            <div class="breakdown-item">
+                                <span class="label">Additional Cases</span>
+                                <span class="value" id="legal-cases">2.7</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="label">Response Time</span>
+                                <span class="value">< 2 min</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="label">Conversion Increase</span>
+                                <span class="value" id="legal-conversion-increase">35%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="savings-chart-container">
+                            <canvas id="legal-growth-chart"></canvas>
+                        </div>
+                        
+                        <div class="benchmark-comparison">
+                            <h4>Your growth vs. similar practices</h4>
+                            <div class="comparison-bars">
+                                <div class="comparison-bar your-bar">
+                                    <div class="bar-fill" style="width: 90%"></div>
+                                    <span class="bar-label">You: $<span id="legal-your-growth">67,500</span></span>
+                                </div>
+                                <div class="comparison-bar avg-bar">
+                                    <div class="bar-fill avg-fill" style="width: 65%"></div>
+                                    <span class="bar-label">Similar Practices: $48,750</span>
+                                </div>
+                            </div>
+                            <p class="benchmark-note">38% above similar practices</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="email-capture" id="legal-email-capture" style="display: none;">
+                <div class="email-capture-content">
+                    <h3>Get Your Practice Growth Report</h3>
+                    <p>Lead response strategies, conversion optimization, and competitive analysis</p>
+                    <form class="roi-email-form" onsubmit="submitEmailCapture(event, 'legal')">
+                        <div class="email-input-group">
+                            <input type="email" placeholder="your@email.com" required data-gtm="calc_legal_email">
+                            <button type="submit">Send My Report</button>
+                        </div>
+                    </form>
+                    <p class="privacy-note">📈 Growth strategies + case studies. Unsubscribe anytime.</p>
+                </div>
+            </div>
+            
+            <div class="calc-ctas">
+                <button class="primary-cta" onclick="startTrial('legal')" data-gtm="calc_legal_trial">Start Converting More Leads</button>
+                <button class="secondary-cta" onclick="scheduleConsultation('legal')" data-gtm="calc_legal_consultation">Schedule Growth Consultation</button>
+                <div class="urgency-text">
+                    <span class="urgency-icon">⚡</span>
+                    <span><strong>623 law firms</strong> already growing with AI</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- E-commerce ROI Calculator -->
+    <div class="roi-calculator ecommerce-calculator" id="ecommerce-calc" style="display: none;">
+        <div class="calc-container">
+            <div class="calc-header">
+                <button class="calc-back-btn" onclick="showCalculatorHub()" data-gtm="calculator_back_to_hub">← Choose Different Industry</button>
+                <div class="calc-progress">
+                    <div class="progress-step active">1</div>
+                    <div class="progress-step">2</div>
+                    <div class="progress-step">3</div>
+                    <span class="progress-text">Step 1 of 3</span>
+                </div>
+            </div>
+            
+            <div class="calc-content">
+                <div class="calc-left">
+                    <h2>E-commerce Revenue Recovery Calculator</h2>
+                    <p class="calc-subhead">Calculate revenue recovered from abandoned carts</p>
+                    
+                    <div class="calc-inputs">
+                        <!-- Input 1: Monthly Visitors -->
+                        <div class="input-group">
+                            <label for="ecommerce-visitors">Monthly Visitors</label>
+                            <div class="range-input">
+                                <input type="range" min="1000" max="100000" value="15000" step="500" id="ecommerce-visitors" data-gtm="calc_ecommerce_visitors">
+                                <div class="range-labels">
+                                    <span>1K</span>
+                                    <span>100K+</span>
+                                </div>
+                            </div>
+                            <div class="value-display">
+                                <span class="current-value">15,000</span>
+                                <span class="value-label">visitors/month</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Input 2: Cart Abandonment Rate -->
+                        <div class="input-group">
+                            <label for="ecommerce-abandonment">Cart Abandonment Rate</label>
+                            <div class="range-input">
+                                <input type="range" min="50" max="90" value="70" id="ecommerce-abandonment" data-gtm="calc_ecommerce_abandonment">
+                                <div class="range-labels">
+                                    <span>50%</span>
+                                    <span>90%</span>
+                                </div>
+                            </div>
+                            <div class="value-display">
+                                <span class="current-value">70</span>
+                                <span class="value-label">% abandoned</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Input 3: Average Order Value -->
+                        <div class="input-group">
+                            <label for="ecommerce-aov">Average Order Value</label>
+                            <div class="range-input">
+                                <input type="range" min="25" max="500" value="85" step="5" id="ecommerce-aov" data-gtm="calc_ecommerce_aov">
+                                <div class="range-labels">
+                                    <span>$25</span>
+                                    <span>$500+</span>
+                                </div>
+                            </div>
+                            <div class="value-display">
+                                <span class="currency-symbol">$</span>
+                                <span class="current-value">85</span>
+                                <span class="value-label">avg order</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Input 4: Store Type -->
+                        <div class="input-group">
+                            <label for="ecommerce-type">Store Type</label>
+                            <select id="ecommerce-type" data-gtm="calc_ecommerce_type">
+                                <option value="fashion">Fashion & Apparel</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="home_garden">Home & Garden</option>
+                                <option value="health_beauty">Health & Beauty</option>
+                                <option value="sports">Sports & Outdoors</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calc-right">
+                    <div class="calc-results">
+                        <div class="results-header">
+                            <h3>Your Monthly Cart Recovery</h3>
+                            <div class="confidence-badge">Based on 934 Stores</div>
+                        </div>
+                        
+                        <div class="primary-result">
+                            <span class="currency">$</span>
+                            <span class="amount" id="ecommerce-amount">32,000</span>
+                            <span class="period">/month</span>
+                        </div>
+                        
+                        <div class="result-breakdown">
+                            <div class="breakdown-item">
+                                <span class="label">Carts Recovered</span>
+                                <span class="value" id="ecommerce-carts">376</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="label">Recovery Rate</span>
+                                <span class="value">37%</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="label">Payback Period</span>
+                                <span class="value">18 days</span>
+                            </div>
+                        </div>
+                        
+                        <div class="savings-chart-container">
+                            <canvas id="ecommerce-recovery-chart"></canvas>
+                        </div>
+                        
+                        <div class="benchmark-comparison">
+                            <h4>Your recovery vs. similar stores</h4>
+                            <div class="comparison-bars">
+                                <div class="comparison-bar your-bar">
+                                    <div class="bar-fill" style="width: 88%"></div>
+                                    <span class="bar-label">You: $<span id="ecommerce-your-recovery">32,000</span></span>
+                                </div>
+                                <div class="comparison-bar avg-bar">
+                                    <div class="bar-fill avg-fill" style="width: 62%"></div>
+                                    <span class="bar-label">Similar Stores: $22,500</span>
+                                </div>
+                            </div>
+                            <p class="benchmark-note">42% above similar stores</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="email-capture" id="ecommerce-email-capture" style="display: none;">
+                <div class="email-capture-content">
+                    <h3>Get Your Recovery Strategy Report</h3>
+                    <p>Cart abandonment solutions, conversion optimization, and competitor benchmarks</p>
+                    <form class="roi-email-form" onsubmit="submitEmailCapture(event, 'ecommerce')">
+                        <div class="email-input-group">
+                            <input type="email" placeholder="your@email.com" required data-gtm="calc_ecommerce_email">
+                            <button type="submit">Send My Report</button>
+                        </div>
+                    </form>
+                    <p class="privacy-note">🛒 Recovery tactics + case studies. Unsubscribe anytime.</p>
+                </div>
+            </div>
+            
+            <div class="calc-ctas">
+                <button class="primary-cta" onclick="startTrial('ecommerce')" data-gtm="calc_ecommerce_trial">Start Recovering Revenue</button>
+                <button class="secondary-cta" onclick="scheduleConsultation('ecommerce')" data-gtm="calc_ecommerce_consultation">Schedule Recovery Consultation</button>
+                <div class="urgency-text">
+                    <span class="urgency-icon">🚀</span>
+                    <span><strong>934 stores</strong> recovering carts with AI</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Results Sharing Modal -->
+    <div class="share-modal" id="shareModal" style="display: none;">
+        <div class="modal-overlay" onclick="closeShareModal()"></div>
+        <div class="modal-content">
+            <h3>Share Your ROI Results</h3>
+            <div class="share-options">
+                <button class="share-btn linkedin" onclick="shareToLinkedIn()" data-gtm="calc_share_linkedin">Share on LinkedIn</button>
+                <button class="share-btn twitter" onclick="shareToTwitter()" data-gtm="calc_share_twitter">Share on Twitter</button>
+                <button class="share-btn email" onclick="shareViaEmail()" data-gtm="calc_share_email">Email Results</button>
+                <button class="share-btn print" onclick="printResults()" data-gtm="calc_share_print">Print Report</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="analytics-tracking.js"></script>
+    <script src="script.js"></script>
+    <script src="calculator-script.js"></script>
+</body>
+</html>

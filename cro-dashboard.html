@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRO Dashboard - AI Chatbot Solutions</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard-styles.css">
+    
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+</head>
+<body class="dashboard-page">
+    
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="header-left">
+                <h1>🚀 CRO Dashboard</h1>
+                <div class="last-updated">
+                    Last updated: <span id="lastUpdated">--</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="refresh-btn" onclick="refreshDashboard()" id="refreshBtn">
+                    <span class="refresh-icon">🔄</span>
+                    Refresh
+                </button>
+                <div class="auto-refresh">
+                    <label>
+                        <input type="checkbox" id="autoRefresh" checked>
+                        Auto-refresh (30s)
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Dashboard Content -->
+    <main class="dashboard-main">
+        
+        <!-- Key Metrics Overview -->
+        <section class="metrics-overview">
+            <h2>Key Performance Indicators</h2>
+            <div class="metric-grid">
+                
+                <!-- Demo CTR -->
+                <div class="metric-card primary">
+                    <div class="metric-header">
+                        <h3>Demo Click-Through Rate</h3>
+                        <div class="metric-period">Last 24h</div>
+                    </div>
+                    <div class="metric-value">
+                        <span class="value" id="demoCTR">28.3</span>
+                        <span class="unit">%</span>
+                    </div>
+                    <div class="metric-target">
+                        Target: <span class="target-value">32.25%</span>
+                    </div>
+                    <div class="metric-trend">
+                        <span class="trend-icon up">↑</span>
+                        <span class="trend-value">+2.1%</span>
+                        <span class="trend-period">vs yesterday</span>
+                    </div>
+                    <div class="metric-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 87.8%"></div>
+                        </div>
+                        <span class="progress-text">87.8% of target</span>
+                    </div>
+                </div>
+                
+                <!-- Trial Conversion -->
+                <div class="metric-card secondary">
+                    <div class="metric-header">
+                        <h3>Trial Conversion Rate</h3>
+                        <div class="metric-period">Last 24h</div>
+                    </div>
+                    <div class="metric-value">
+                        <span class="value" id="trialConversion">8.7</span>
+                        <span class="unit">%</span>
+                    </div>
+                    <div class="metric-target">
+                        Target: <span class="target-value">11.7%</span>
+                    </div>
+                    <div class="metric-trend">
+                        <span class="trend-icon up">↑</span>
+                        <span class="trend-value">+0.4%</span>
+                        <span class="trend-period">vs yesterday</span>
+                    </div>
+                    <div class="metric-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 74.4%"></div>
+                        </div>
+                        <span class="progress-text">74.4% of target</span>
+                    </div>
+                </div>
+                
+                <!-- Calculator Completion -->
+                <div class="metric-card tertiary">
+                    <div class="metric-header">
+                        <h3>Calculator Completion</h3>
+                        <div class="metric-period">Last 24h</div>
+                    </div>
+                    <div class="metric-value">
+                        <span class="value" id="calcCompletion">71.2</span>
+                        <span class="unit">%</span>
+                    </div>
+                    <div class="metric-target">
+                        Target: <span class="target-value">75%</span>
+                    </div>
+                    <div class="metric-trend">
+                        <span class="trend-icon down">↓</span>
+                        <span class="trend-value">-1.8%</span>
+                        <span class="trend-period">vs yesterday</span>
+                    </div>
+                    <div class="metric-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 94.9%"></div>
+                        </div>
+                        <span class="progress-text">94.9% of target</span>
+                    </div>
+                </div>
+                
+                <!-- Industry Performance -->
+                <div class="metric-card industry">
+                    <div class="metric-header">
+                        <h3>Industry Performance</h3>
+                        <div class="metric-period">Conversion rates</div>
+                    </div>
+                    <div class="industry-breakdown">
+                        <div class="industry-item">
+                            <span class="industry-name">Healthcare</span>
+                            <span class="industry-rate">11.2%</span>
+                            <div class="industry-bar">
+                                <div class="industry-fill healthcare" style="width: 95.7%"></div>
+                            </div>
+                        </div>
+                        <div class="industry-item">
+                            <span class="industry-name">Legal</span>
+                            <span class="industry-rate">9.8%</span>
+                            <div class="industry-bar">
+                                <div class="industry-fill legal" style="width: 83.8%"></div>
+                            </div>
+                        </div>
+                        <div class="industry-item">
+                            <span class="industry-name">E-commerce</span>
+                            <span class="industry-rate">12.4%</span>
+                            <div class="industry-bar">
+                                <div class="industry-fill ecommerce" style="width: 106.0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        
+        <!-- Conversion Funnel -->
+        <section class="funnel-section">
+            <h2>Conversion Funnel Analysis</h2>
+            <div class="funnel-container">
+                <div class="funnel-chart">
+                    <canvas id="conversionFunnel"></canvas>
+                </div>
+                <div class="funnel-metrics">
+                    <div class="funnel-stage">
+                        <div class="stage-number">1</div>
+                        <div class="stage-info">
+                            <div class="stage-name">Page Views</div>
+                            <div class="stage-count" id="pageViews">12,847</div>
+                            <div class="stage-rate">100%</div>
+                        </div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-number">2</div>
+                        <div class="stage-info">
+                            <div class="stage-name">Demo Clicks</div>
+                            <div class="stage-count" id="demoClicks">3,635</div>
+                            <div class="stage-rate" id="demoClickRate">28.3%</div>
+                        </div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-number">3</div>
+                        <div class="stage-info">
+                            <div class="stage-name">Demo Completed</div>
+                            <div class="stage-count" id="demoCompleted">2,836</div>
+                            <div class="stage-rate" id="demoCompletionRate">78.0%</div>
+                        </div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-number">4</div>
+                        <div class="stage-info">
+                            <div class="stage-name">Calculator Used</div>
+                            <div class="stage-count" id="calcUsed">1,847</div>
+                            <div class="stage-rate" id="calcUsageRate">65.1%</div>
+                        </div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-number">5</div>
+                        <div class="stage-info">
+                            <div class="stage-name">Email Captured</div>
+                            <div class="stage-count" id="emailCaptured">923</div>
+                            <div class="stage-rate" id="emailCaptureRate">50.0%</div>
+                        </div>
+                    </div>
+                    <div class="funnel-stage">
+                        <div class="stage-number">6</div>
+                        <div class="stage-info">
+                            <div class="stage-name">Trial Started</div>
+                            <div class="stage-count" id="trialStarted">316</div>
+                            <div class="stage-rate" id="trialConversionRate">34.2%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- A/B Tests -->
+        <section class="ab-tests-section">
+            <h2>Active A/B Tests</h2>
+            <div class="tests-grid">
+                
+                <div class="test-card">
+                    <div class="test-header">
+                        <h3>Homepage Headlines</h3>
+                        <div class="test-status running">Running</div>
+                    </div>
+                    <div class="test-variants">
+                        <div class="variant winner">
+                            <div class="variant-name">A: "Save $43K Daily"</div>
+                            <div class="variant-metrics">
+                                <span class="conversion-rate">32.1%</span>
+                                <span class="sample-size">2,847 visitors</span>
+                            </div>
+                        </div>
+                        <div class="variant">
+                            <div class="variant-name">B: "Cut Costs 68%"</div>
+                            <div class="variant-metrics">
+                                <span class="conversion-rate">27.8%</span>
+                                <span class="sample-size">2,834 visitors</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test-result">
+                        <div class="confidence">95% Confidence</div>
+                        <div class="improvement">+15.3% improvement</div>
+                    </div>
+                </div>
+                
+                <div class="test-card">
+                    <div class="test-header">
+                        <h3>Demo CTA Buttons</h3>
+                        <div class="test-status running">Running</div>
+                    </div>
+                    <div class="test-variants">
+                        <div class="variant">
+                            <div class="variant-name">A: "Interactive Demo"</div>
+                            <div class="variant-metrics">
+                                <span class="conversion-rate">28.9%</span>
+                                <span class="sample-size">1,923 visitors</span>
+                            </div>
+                        </div>
+                        <div class="variant">
+                            <div class="variant-name">B: "See It In Action"</div>
+                            <div class="variant-metrics">
+                                <span class="conversion-rate">29.7%</span>
+                                <span class="sample-size">1,891 visitors</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test-result">
+                        <div class="confidence">78% Confidence</div>
+                        <div class="improvement">+2.8% improvement</div>
+                    </div>
+                </div>
+                
+                <div class="test-card">
+                    <div class="test-header">
+                        <h3>Calculator Inputs</h3>
+                        <div class="test-status completed">Completed</div>
+                    </div>
+                    <div class="test-variants">
+                        <div class="variant winner">
+                            <div class="variant-name">A: 3 Input Fields</div>
+                            <div class="variant-metrics">
+                                <span class="conversion-rate">72.4%</span>
+                                <span class="sample-size">1,445 users</span>
+                            </div>
+                        </div>
+                        <div class="variant">
+                            <div class="variant-name">B: 5 Input Fields</div>
+                            <div class="variant-metrics">
+                                <span class="conversion-rate">64.2%</span>
+                                <span class="sample-size">1,402 users</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test-result">
+                        <div class="confidence">99% Confidence</div>
+                        <div class="improvement">+12.8% improvement</div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        
+        <!-- Real-time Activity -->
+        <section class="activity-section">
+            <h2>Real-time Activity</h2>
+            <div class="activity-container">
+                
+                <div class="activity-feed">
+                    <h3>Live Conversions</h3>
+                    <div class="activity-list" id="activityFeed">
+                        <!-- Activities will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="geographic-map">
+                    <h3>Geographic Activity</h3>
+                    <div class="map-container">
+                        <div class="activity-heatmap" id="activityMap">
+                            <!-- Simplified map visualization -->
+                            <div class="region active" data-region="west-coast" style="left: 10%; top: 20%; width: 15%; height: 60%;">
+                                <div class="region-label">West Coast</div>
+                                <div class="region-count">847</div>
+                            </div>
+                            <div class="region" data-region="midwest" style="left: 35%; top: 15%; width: 20%; height: 50%;">
+                                <div class="region-label">Midwest</div>
+                                <div class="region-count">423</div>
+                            </div>
+                            <div class="region very-active" data-region="northeast" style="left: 65%; top: 10%; width: 18%; height: 45%;">
+                                <div class="region-label">Northeast</div>
+                                <div class="region-count">1,234</div>
+                            </div>
+                            <div class="region" data-region="southeast" style="left: 55%; top: 45%; width: 25%; height: 40%;">
+                                <div class="region-label">Southeast</div>
+                                <div class="region-count">567</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        
+        <!-- Performance Alerts -->
+        <section class="alerts-section">
+            <h2>Performance Alerts</h2>
+            <div class="alerts-container" id="alertsContainer">
+                <!-- Alerts will be populated by JavaScript -->
+            </div>
+        </section>
+        
+    </main>
+    
+    <!-- Scripts -->
+    <script src="analytics-tracking.js"></script>
+    <script src="dashboard-script.js"></script>
+</body>
+</html>
