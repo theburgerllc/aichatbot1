@@ -2,6 +2,9 @@ import { withSentryConfig } from '@sentry/nextjs';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  sentryOptions: {
+  telemetry: false,
+  },
   typescript: {
     ignoreBuildErrors: false,
   },
