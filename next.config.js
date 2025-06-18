@@ -128,21 +128,37 @@ const nextConfig = {
   
   async redirects() {
     return [
-      // Temporary redirects while migrating from static HTML to Next.js
+      // Redirects from old static HTML to new Next.js pages
       {
-        source: '/demo',
-        destination: '/demo.html',
-        permanent: false,
+        source: '/index.html',
+        destination: '/home',
+        permanent: true,
       },
       {
+        source: '/demo.html',
+        destination: '/demo',
+        permanent: true,
+      },
+      {
+        source: '/calculators.html',
+        destination: '/calculators',
+        permanent: true,
+      },
+      {
+        source: '/cro-dashboard.html',
+        destination: '/dashboard',
+        permanent: true,
+      },
+      // Legacy routes (for backward compatibility)
+      {
         source: '/calculator',
-        destination: '/calculators.html',
-        permanent: false,
+        destination: '/calculators',
+        permanent: true,
       },
       {
         source: '/cro-dashboard',
-        destination: '/cro-dashboard.html', 
-        permanent: false,
+        destination: '/dashboard',
+        permanent: true,
       }
     ];
   }
