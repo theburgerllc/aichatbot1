@@ -394,6 +394,7 @@ function initializeVideoPlayers() {
 }
 
 // Modal Functions
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function openDemo() {
     const modal = document.getElementById('demoModal');
     modal.classList.add('show');
@@ -404,6 +405,7 @@ function openDemo() {
     trackEvent('demo_modal_opened', { industry: currentIndustry });
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function closeDemo() {
     const modal = document.getElementById('demoModal');
     modal.classList.remove('show');
@@ -414,6 +416,7 @@ function closeDemo() {
     trackEvent('demo_modal_closed', { industry: currentIndustry });
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function openCalculator() {
     const modal = document.getElementById('calculatorModal');
     modal.classList.add('show');
@@ -480,6 +483,7 @@ function openCalculator() {
     trackEvent('calculator_modal_opened', { industry: currentIndustry });
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function closeCalculator() {
     const modal = document.getElementById('calculatorModal');
     modal.classList.remove('show');
@@ -534,6 +538,7 @@ function closeExitIntent() {
     trackEvent('exit_intent_closed', { industry: currentIndustry });
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function submitExitIntent(event) {
     event.preventDefault();
     
@@ -550,6 +555,7 @@ function submitExitIntent(event) {
     closeExitIntent();
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function startTrial() {
     trackEvent('trial_started', {
         industry: currentIndustry,
@@ -560,6 +566,7 @@ function startTrial() {
     window.location.href = `/signup?industry=${  currentIndustry}`;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function closeNotification() {
     const popup = document.getElementById('notificationPopup');
     popup.classList.remove('show');
@@ -567,6 +574,7 @@ function closeNotification() {
     trackEvent('notification_closed', { industry: currentIndustry });
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function playMicroDemo() {
     const video = document.getElementById('microDemo');
     const playButton = document.querySelector('.play-button');
@@ -650,6 +658,7 @@ window.addEventListener('beforeunload', () => {
 });
 
 // Additional utility functions
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function preloadCriticalResources() {
     // Preload industry-specific videos
     Object.values(industryData).forEach(industry => {

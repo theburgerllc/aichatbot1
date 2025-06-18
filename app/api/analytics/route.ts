@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { rateLimit } from '@/lib/rate-limit';
-import { validateAnalyticsPayload } from '@/lib/validation';
+import { validateAnalyticsPayload, analyticsPayloadSchema } from '@/lib/validation';
+import { z } from 'zod';
+
+type AnalyticsPayload = z.infer<typeof analyticsPayloadSchema>;
 
 export async function POST(request: NextRequest) {
   try {
@@ -32,7 +35,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function processAnalyticsEvent(data: any) {
+async function processAnalyticsEvent(data: AnalyticsPayload) {
   try {
     // Log analytics event (server-side, so no window object)
     console.log('Analytics Event:', {

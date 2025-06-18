@@ -1,6 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
+// Define types based on our schemas
+type DemoProgressData = {
+  stepNumber: number;
+  industry: 'healthcare' | 'legal' | 'ecommerce';
+  timeSpent: number;
+  completed: boolean;
+};
+
+type DemoFeedbackData = {
+  rating: number;
+  feedback?: string;
+  industry: 'healthcare' | 'legal' | 'ecommerce';
+  email?: string;
+  interestedInTrial: boolean;
+};
+
+type CustomDemoRequestData = {
+  email: string;
+  industry: string;
+  company: string;
+  message: string;
+  requestedAt: string;
+};
+
+type SalesNotificationData = {
+  email: string;
+  industry: string;
+  company: string;
+  message: string;
+};
+
 const demoProgressSchema = z.object({
   stepNumber: z.number().min(1).max(15),
   industry: z.enum(['healthcare', 'legal', 'ecommerce']),
@@ -39,7 +70,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function handleTrackProgress(data: any) {
+async function handleTrackProgress(data: DemoProgressData) {
   try {
     const validatedData = demoProgressSchema.parse(data);
 
@@ -65,7 +96,7 @@ async function handleTrackProgress(data: any) {
   }
 }
 
-async function handleSubmitFeedback(data: any) {
+async function handleSubmitFeedback(data: DemoFeedbackData) {
   try {
     const validatedData = demoFeedbackSchema.parse(data);
 
@@ -99,44 +130,40 @@ async function handleSubmitFeedback(data: any) {
   }
 }
 
-async function handleCustomDemoRequest(data: any) {
-  try {
-    const { email, industry, company, message } = data;
+async function handleCustomDemoRequest(data: CustomDemoRequestData) {
+  const { email, industry, company, message } = data;
 
-    // Store custom demo request
-    await storeCustomDemoRequest({
-      email,
-      industry,
-      company,
-      message,
-      requestedAt: new Date().toISOString(),
-    });
+  // Store custom demo request
+  await storeCustomDemoRequest({
+    email,
+    industry,
+    company,
+    message,
+    requestedAt: new Date().toISOString(),
+  });
 
-    // Send notification to sales team
-    await notifySalesTeam({
-      email,
-      industry,
-      company,
-      message,
-    });
+  // Send notification to sales team
+  await notifySalesTeam({
+    email,
+    industry,
+    company,
+    message,
+  });
 
-    // Track event
-    await trackEvent('custom_demo_requested', {
-      industry,
-      hasCompany: !!company,
-      hasMessage: !!message,
-    });
+  // Track event
+  await trackEvent('custom_demo_requested', {
+    industry,
+    hasCompany: !!company,
+    hasMessage: !!message,
+  });
 
-    return NextResponse.json({
-      success: true,
-      message: 'Custom demo request submitted successfully!',
-    });
-  } catch (error) {
-    throw error;
-  }
+  return NextResponse.json({
+    success: true,
+    message: 'Custom demo request submitted successfully!',
+  });
 }
 
-async function trackEvent(event: string, properties: any) {
+async function trackEvent(event: string, properties: Record<string, unknown>) {
   try {
     await fetch('/api/analytics', {
       method: 'POST',
@@ -148,7 +175,7 @@ async function trackEvent(event: string, properties: any) {
   }
 }
 
-async function storeDemoFeedback(feedback: any) {
+async function storeDemoFeedback(feedback: DemoFeedbackData) {
   // Store in database
   // Implementation depends on your database choice
   console.log('Storing demo feedback:', feedback);
@@ -160,12 +187,12 @@ async function addToTrialFollowUp(email: string, industry: string) {
   console.log('Adding to trial follow-up:', { email, industry });
 }
 
-async function storeCustomDemoRequest(request: any) {
+async function storeCustomDemoRequest(request: CustomDemoRequestData) {
   // Store in database
   console.log('Storing custom demo request:', request);
 }
 
-async function notifySalesTeam(request: any) {
+async function notifySalesTeam(request: SalesNotificationData) {
   // Send notification to sales team via email/Slack
   console.log('Notifying sales team:', request);
 }

@@ -9,7 +9,9 @@
  * Example: node test-deployment.js https://aichatbotsolutions.io
  */
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const https = require('https');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const http = require('http');
 
 // Configuration

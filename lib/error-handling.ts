@@ -13,7 +13,7 @@ export class APIError extends Error {
 }
 
 export class ValidationError extends APIError {
-  constructor(message: string, public details?: any) {
+  constructor(message: string, public details?: Record<string, unknown>) {
     super(message, 400, 'VALIDATION_ERROR');
     this.details = details;
   }
@@ -99,7 +99,7 @@ export function createErrorHandler(operation: string) {
     }
     
     if (error instanceof z.ZodError) {
-      throw new ValidationError('Invalid input data', error.errors);
+      throw new ValidationError('Invalid input data', { errors: error.errors });
     }
     
     throw new APIError(`${operation} failed`);
@@ -107,7 +107,7 @@ export function createErrorHandler(operation: string) {
 }
 
 // Error logging utility
-export function logError(error: unknown, context: Record<string, any> = {}) {
+export function logError(error: unknown, context: Record<string, unknown> = {}) {
   const errorInfo = {
     message: error instanceof Error ? error.message : String(error),
     stack: error instanceof Error ? error.stack : undefined,

@@ -74,7 +74,7 @@ export async function register() {
 }
 
 // Add the onRequestError hook for Next.js 15
-export async function onRequestError(err: unknown, request: any, context: any) {
+export async function onRequestError(err: unknown, request: unknown, context: unknown) {
   const { captureRequestError } = await import('@sentry/nextjs');
-  captureRequestError(err, request, context);
+  captureRequestError(err, request as any, context as any);
 }

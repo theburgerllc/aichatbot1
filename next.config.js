@@ -2,9 +2,6 @@ import { withSentryConfig } from '@sentry/nextjs';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  sentryOptions: {
-  telemetry: false,
-  },
   typescript: {
     ignoreBuildErrors: false,
   },
@@ -131,9 +128,20 @@ const nextConfig = {
   
   async redirects() {
     return [
+      // Temporary redirects while migrating from static HTML to Next.js
       {
         source: '/demo',
-        destination: '/?demo=true',
+        destination: '/demo.html',
+        permanent: false,
+      },
+      {
+        source: '/calculator',
+        destination: '/calculators.html',
+        permanent: false,
+      },
+      {
+        source: '/cro-dashboard',
+        destination: '/cro-dashboard.html', 
         permanent: false,
       }
     ];

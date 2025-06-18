@@ -1,5 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+type PaymentData = {
+  amount: number;
+  sourceId: string;
+  currency?: string;
+  note?: string;
+};
+
+type SubscriptionData = {
+  planId: string;
+  customerId: string;
+  locationId?: string;
+};
+
 // Square SDK placeholder - will be configured with actual SDK in production
 const _squareConfig = {
   accessToken: process.env.SQUARE_ACCESS_TOKEN,
@@ -27,7 +40,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function handleCreatePayment(data: any) {
+async function handleCreatePayment(data: PaymentData) {
   try {
     // Placeholder for Square payment processing
     // In production, this would use the actual Square SDK
@@ -53,7 +66,7 @@ async function handleCreatePayment(data: any) {
   }
 }
 
-async function handleCreateSubscription(data: any) {
+async function handleCreateSubscription(data: SubscriptionData) {
   try {
     // Placeholder for Square subscription processing
     console.log('Creating subscription with Square:', {

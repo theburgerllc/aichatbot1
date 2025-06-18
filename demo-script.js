@@ -739,6 +739,34 @@ function createFeaturesStep(step) {
     `;
 }
 
+// Create Testimonial Step
+function createTestimonialStep(step) {
+    const testimonialsHtml = step.testimonials?.map(testimonial => 
+        `<div class="testimonial-item">
+            <div class="testimonial-content">
+                <p>"${testimonial.content}"</p>
+            </div>
+            <div class="testimonial-author">
+                <strong>${testimonial.author}</strong>
+                <span>${testimonial.company}</span>
+            </div>
+        </div>`
+    ).join('') || '';
+    
+    return `
+        <div class="social-proof">
+            <h2>${step.title}</h2>
+            <div class="testimonials-grid">
+                ${testimonialsHtml}
+            </div>
+        </div>
+        <div class="step-navigation">
+            ${currentStep > 1 ? '<button class="prev-step">← Previous</button>' : ''}
+            <button class="next-step">${step.cta}</button>
+        </div>
+    `;
+}
+
 // Create Results Step
 function createResultsStep(step) {
     const metricsHtml = step.metrics.map(metric => 
@@ -779,6 +807,18 @@ function createConversionStep(step) {
             </div>
         </div>
     `;
+}
+
+// Create Metrics Grid Helper
+function createMetricsGrid(metrics) {
+    const metricsHtml = metrics.map(metric => 
+        `<div class="metric-item">
+            <div class="metric-value" data-count-up="${metric.value}" data-prefix="${metric.prefix || ''}" data-suffix="${metric.suffix || ''}">${metric.value}</div>
+            <div class="metric-label">${metric.label}</div>
+        </div>`
+    ).join('');
+    
+    return `<div class="metrics-grid">${metricsHtml}</div>`;
 }
 
 // Add Step Navigation Listeners

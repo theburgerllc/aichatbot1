@@ -1,6 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 
+type WebhookPayload = {
+  type: string;
+  data: Record<string, unknown>;
+  created_at?: string;
+};
+
+type PaymentData = Record<string, unknown> & {
+  payment?: {
+    id: string;
+    amount: number;
+    status: string;
+    amount_money?: {
+      amount: number;
+      currency: string;
+    };
+  };
+};
+
+type SubscriptionData = Record<string, unknown> & {
+  subscription?: {
+    id: string;
+    customerId: string;
+    planId: string;
+    plan_id: string;
+    status: string;
+  };
+};
+
+type InvoiceData = Record<string, unknown> & {
+  id?: string;
+  amount?: number;
+  subscriptionId?: string;
+  paidAt?: string;
+};
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.text();
@@ -54,7 +89,7 @@ function verifyWebhookSignature(body: string, signature: string): boolean {
   }
 }
 
-async function processWebhook(payload: any) {
+async function processWebhook(payload: WebhookPayload) {
   const { type, data } = payload;
 
   switch (type) {
@@ -78,7 +113,7 @@ async function processWebhook(payload: any) {
   }
 }
 
-async function handlePaymentCreated(data: any) {
+async function handlePaymentCreated(data: PaymentData) {
   console.log('Payment created:', data);
 
   // Update order status
@@ -90,14 +125,14 @@ async function handlePaymentCreated(data: any) {
   });
 }
 
-async function handlePaymentUpdated(data: any) {
+async function handlePaymentUpdated(data: PaymentData) {
   console.log('Payment updated:', data);
 
   // Handle payment status changes
   // Update customer records
 }
 
-async function handleSubscriptionCreated(data: any) {
+async function handleSubscriptionCreated(data: SubscriptionData) {
   console.log('Subscription created:', data);
 
   // Provision access
@@ -108,21 +143,21 @@ async function handleSubscriptionCreated(data: any) {
   });
 }
 
-async function handleSubscriptionUpdated(data: any) {
+async function handleSubscriptionUpdated(data: SubscriptionData) {
   console.log('Subscription updated:', data);
 
   // Handle subscription changes
   // Update billing information
 }
 
-async function handleInvoicePaymentMade(data: any) {
+async function handleInvoicePaymentMade(data: InvoiceData) {
   console.log('Invoice payment made:', data);
 
   // Update billing records
   // Send receipt
 }
 
-async function trackEvent(event: string, properties: any) {
+async function trackEvent(event: string, properties: Record<string, unknown>) {
   try {
     await fetch('/api/analytics', {
       method: 'POST',

@@ -104,7 +104,7 @@ async function calculateROI(params: {
   };
 }
 
-async function trackEvent(event: string, properties: any) {
+async function trackEvent(event: string, properties: Record<string, unknown>) {
   // Send to analytics service
   try {
     await fetch('/api/analytics', {

@@ -374,7 +374,7 @@ function animateCountUp(elementId, targetValue) {
 }
 
 // Chart Functions
-function updateSavingsChart(industry, savings, hours) {
+function updateSavingsChart(industry, savings, _hours) {
   const canvas = document.getElementById(`${industry}-savings-chart`);
   if (!canvas) return;
 
@@ -593,6 +593,7 @@ function showEmailCaptureForm(industry) {
 }
 
 // Navigation Functions
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function showCalculatorHub() {
   // Hide all calculators
   document.querySelectorAll('.roi-calculator').forEach(calc => {
@@ -616,6 +617,7 @@ function showCalculatorHub() {
 }
 
 // Conversion Actions
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function startTrial(industry) {
   trackCalculatorEvent('trial_started_from_calculator', {
     industry,
@@ -633,6 +635,7 @@ function startTrial(industry) {
   window.location.href = `/signup?${params.toString()}`;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function scheduleConsultation(industry) {
   trackCalculatorEvent('consultation_scheduled_from_calculator', {
     industry,
@@ -644,6 +647,7 @@ function scheduleConsultation(industry) {
   alert('Consultation scheduling widget would open here');
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function submitEmailCapture(event, industry) {
   event.preventDefault();
 
@@ -695,6 +699,7 @@ function showPostEmailCTAs(industry) {
 }
 
 // Social Sharing Functions
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function shareToLinkedIn() {
   const url = encodeURIComponent(window.location.href);
   const text = encodeURIComponent(
@@ -706,6 +711,7 @@ function shareToLinkedIn() {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function shareToTwitter() {
   const url = encodeURIComponent(window.location.href);
   const text = encodeURIComponent(
@@ -717,6 +723,7 @@ function shareToTwitter() {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function shareViaEmail() {
   const subject = encodeURIComponent('Check out my AI chatbot ROI calculation');
   const body = encodeURIComponent(
@@ -725,10 +732,12 @@ function shareViaEmail() {
   window.location.href = `mailto:?subject=${subject}&body=${body}`;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function printResults() {
   window.print();
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function closeShareModal() {
   document.getElementById('shareModal').style.display = 'none';
 }
