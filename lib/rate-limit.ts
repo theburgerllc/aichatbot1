@@ -7,7 +7,7 @@ const inMemoryLimiter = new RateLimiterMemory({
 });
 
 // Redis-based rate limiter for production
-const redisLimiter: RateLimiterRedis | null = null;
+const _redisLimiter: RateLimiterRedis | null = null;
 
 // Note: Redis configuration will be done in production environment
 // For now, using in-memory rate limiting

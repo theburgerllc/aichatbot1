@@ -37,7 +37,15 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
-        ...globals.es2021
+        ...globals.es2021,
+        gtag: 'readonly',
+        dataLayer: 'writable',
+        window: 'readonly',
+        document: 'readonly',
+        localStorage: 'readonly',
+        sessionStorage: 'readonly',
+        navigator: 'readonly',
+        Chart: 'readonly'
       }
     },
     plugins: {

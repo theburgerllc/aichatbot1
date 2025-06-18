@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // Square SDK placeholder - will be configured with actual SDK in production
-const squareConfig = {
+const _squareConfig = {
   accessToken: process.env.SQUARE_ACCESS_TOKEN,
   environment: process.env.SQUARE_ENVIRONMENT || 'sandbox',
 };
@@ -16,10 +16,7 @@ export async function POST(request: NextRequest) {
       case 'create_subscription':
         return await handleCreateSubscription(data);
       default:
-        return NextResponse.json(
-          { error: 'Invalid action' },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
     }
   } catch (error) {
     console.error('Square API error:', error);
@@ -34,15 +31,15 @@ async function handleCreatePayment(data: any) {
   try {
     // Placeholder for Square payment processing
     // In production, this would use the actual Square SDK
-    console.log('Processing payment with Square:', { 
+    console.log('Processing payment with Square:', {
       amount: data.amount,
-      sourceId: data.sourceId 
+      sourceId: data.sourceId,
     });
-    
+
     return NextResponse.json({
       success: true,
       payment: {
-        id: `mock_payment_${  Date.now()}`,
+        id: `mock_payment_${Date.now()}`,
         status: 'COMPLETED',
         amount: data.amount,
       },
@@ -61,13 +58,13 @@ async function handleCreateSubscription(data: any) {
     // Placeholder for Square subscription processing
     console.log('Creating subscription with Square:', {
       planId: data.planId,
-      customerId: data.customerId
+      customerId: data.customerId,
     });
-    
+
     return NextResponse.json({
       success: true,
       subscription: {
-        id: `mock_subscription_${  Date.now()}`,
+        id: `mock_subscription_${Date.now()}`,
         status: 'ACTIVE',
         planId: data.planId,
       },

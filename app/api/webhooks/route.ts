@@ -5,29 +5,23 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.text();
     const signature = request.headers.get('x-square-signature');
-    
+
     if (!signature) {
-      return NextResponse.json(
-        { error: 'Missing signature' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Missing signature' }, { status: 400 });
     }
-    
+
     // Verify webhook signature
     const isValid = verifyWebhookSignature(body, signature);
-    
+
     if (!isValid) {
-      return NextResponse.json(
-        { error: 'Invalid signature' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
     }
-    
+
     const payload = JSON.parse(body);
-    
+
     // Process webhook based on type
     await processWebhook(payload);
-    
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Webhook processing error:', error);
@@ -45,11 +39,11 @@ function verifyWebhookSignature(body: string, signature: string): boolean {
       console.error('Webhook secret not configured');
       return false;
     }
-    
+
     const hmac = crypto.createHmac('sha256', webhookSecret);
     hmac.update(body);
     const expectedSignature = hmac.digest('base64');
-    
+
     return crypto.timingSafeEqual(
       Buffer.from(signature),
       Buffer.from(expectedSignature)
@@ -62,7 +56,7 @@ function verifyWebhookSignature(body: string, signature: string): boolean {
 
 async function processWebhook(payload: any) {
   const { type, data } = payload;
-  
+
   switch (type) {
     case 'payment.created':
       await handlePaymentCreated(data);
@@ -86,7 +80,7 @@ async function processWebhook(payload: any) {
 
 async function handlePaymentCreated(data: any) {
   console.log('Payment created:', data);
-  
+
   // Update order status
   // Send confirmation email
   // Track analytics event
@@ -98,14 +92,14 @@ async function handlePaymentCreated(data: any) {
 
 async function handlePaymentUpdated(data: any) {
   console.log('Payment updated:', data);
-  
+
   // Handle payment status changes
   // Update customer records
 }
 
 async function handleSubscriptionCreated(data: any) {
   console.log('Subscription created:', data);
-  
+
   // Provision access
   // Send welcome email
   // Update customer status
@@ -116,14 +110,14 @@ async function handleSubscriptionCreated(data: any) {
 
 async function handleSubscriptionUpdated(data: any) {
   console.log('Subscription updated:', data);
-  
+
   // Handle subscription changes
   // Update billing information
 }
 
 async function handleInvoicePaymentMade(data: any) {
   console.log('Invoice payment made:', data);
-  
+
   // Update billing records
   // Send receipt
 }

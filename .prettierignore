@@ -1,0 +1,42 @@
+# Dependencies
+node_modules
+.npm
+
+# Build outputs
+.next
+dist
+build
+coverage
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache
+.cache
+.vercel
+
+# IDE
+.vscode
+.idea
+
+# Generated files
+*.tsbuildinfo
+CHANGELOG.md
+
+# Public assets
+public/*.png
+public/*.jpg
+public/*.gif
+public/*.ico
+public/*.svg
+public/*.woff*
+public/*.ttf
+public/*.eot
+
+# Config files with specific formatting
+.env*
+*.min.js
+*.min.css

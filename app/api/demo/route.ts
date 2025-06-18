@@ -28,10 +28,7 @@ export async function POST(request: NextRequest) {
       case 'request_custom_demo':
         return await handleCustomDemoRequest(data);
       default:
-        return NextResponse.json(
-          { error: 'Invalid action' },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
     }
   } catch (error) {
     console.error('Demo API error:', error);
@@ -45,7 +42,7 @@ export async function POST(request: NextRequest) {
 async function handleTrackProgress(data: any) {
   try {
     const validatedData = demoProgressSchema.parse(data);
-    
+
     // Track demo progress
     await trackEvent('demo_progress', {
       step: validatedData.stepNumber,
@@ -53,9 +50,9 @@ async function handleTrackProgress(data: any) {
       timeSpent: validatedData.timeSpent,
       completed: validatedData.completed,
     });
-    
+
     // Store progress in session/database if needed
-    
+
     return NextResponse.json({ success: true });
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -71,25 +68,25 @@ async function handleTrackProgress(data: any) {
 async function handleSubmitFeedback(data: any) {
   try {
     const validatedData = demoFeedbackSchema.parse(data);
-    
+
     // Store feedback
     await storeDemoFeedback(validatedData);
-    
+
     // Track feedback event
     await trackEvent('demo_feedback_submitted', {
       industry: validatedData.industry,
       rating: validatedData.rating,
       interestedInTrial: validatedData.interestedInTrial,
     });
-    
+
     // If interested in trial and email provided, add to follow-up list
     if (validatedData.interestedInTrial && validatedData.email) {
       await addToTrialFollowUp(validatedData.email, validatedData.industry);
     }
-    
-    return NextResponse.json({ 
+
+    return NextResponse.json({
       success: true,
-      message: 'Thank you for your feedback!' 
+      message: 'Thank you for your feedback!',
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -105,7 +102,7 @@ async function handleSubmitFeedback(data: any) {
 async function handleCustomDemoRequest(data: any) {
   try {
     const { email, industry, company, message } = data;
-    
+
     // Store custom demo request
     await storeCustomDemoRequest({
       email,
@@ -114,7 +111,7 @@ async function handleCustomDemoRequest(data: any) {
       message,
       requestedAt: new Date().toISOString(),
     });
-    
+
     // Send notification to sales team
     await notifySalesTeam({
       email,
@@ -122,17 +119,17 @@ async function handleCustomDemoRequest(data: any) {
       company,
       message,
     });
-    
+
     // Track event
     await trackEvent('custom_demo_requested', {
       industry,
       hasCompany: !!company,
       hasMessage: !!message,
     });
-    
-    return NextResponse.json({ 
+
+    return NextResponse.json({
       success: true,
-      message: 'Custom demo request submitted successfully!' 
+      message: 'Custom demo request submitted successfully!',
     });
   } catch (error) {
     throw error;
