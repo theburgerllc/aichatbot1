@@ -179,10 +179,4 @@ export function Header({ currentIndustry }: HeaderProps) {
   )
 }
 
-// Extend Window interface for TypeScript
-declare global {
-  interface Window {
-    gtag: (...args: any[]) => void
-    dataLayer: any[]
-  }
-}
+// Window interface is now declared in types/global.d.ts

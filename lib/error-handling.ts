@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 import { z } from 'zod';
 
 export class APIError extends Error {
@@ -51,7 +52,10 @@ export class ExternalServiceError extends APIError {
 }
 
 export function handleAPIError(error: unknown): NextResponse {
-  console.error('API Error:', error);
+  logger.error('API Error occurred', error as Error, {
+    errorType: 'api_error',
+    handlerFunction: 'handleAPIError',
+  });
 
   if (error instanceof APIError) {
     return NextResponse.json(
@@ -76,7 +80,10 @@ export function handleAPIError(error: unknown): NextResponse {
   }
 
   // Log unexpected errors for monitoring
-  console.error('Unhandled API error:', error);
+  logger.error('Unhandled API error', error as Error, {
+    errorType: 'unhandled_api_error',
+    handlerFunction: 'handleAPIError',
+  });
   
   // Don't expose internal error details in production
   const isProduction = process.env.NODE_ENV === 'production';
@@ -92,7 +99,11 @@ export function handleAPIError(error: unknown): NextResponse {
 
 export function createErrorHandler(operation: string) {
   return (error: unknown) => {
-    console.error(`${operation} error:`, error);
+    logger.error(`${operation} error occurred`, error as Error, {
+      operation,
+      errorType: 'operation_error',
+      handlerFunction: 'createErrorHandler',
+    });
     
     if (error instanceof APIError) {
       throw error;
@@ -108,20 +119,15 @@ export function createErrorHandler(operation: string) {
 
 // Error logging utility
 export function logError(error: unknown, context: Record<string, unknown> = {}) {
-  const errorInfo = {
-    message: error instanceof Error ? error.message : String(error),
-    stack: error instanceof Error ? error.stack : undefined,
-    timestamp: new Date().toISOString(),
+  // Use our structured logger instead of console.error
+  logger.error('Error logged via logError utility', error as Error, {
     ...context,
-  };
+    handlerFunction: 'logError',
+    errorType: 'logged_error',
+  });
   
-  console.error('Error logged:', errorInfo);
-  
-  // In production, you might want to send this to an error tracking service
-  if (process.env.NODE_ENV === 'production') {
-    // Send to error tracking service (Sentry, LogRocket, etc.)
-    // Example: Sentry.captureException(error, { extra: context });
-  }
+  // Note: Sentry integration is now handled automatically by the logger
+  // when in production environment
 }
 
 // Async error wrapper

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { logger, generateCorrelationId, logApiRequest, logApiError } from '@/lib/logger';
 import { z } from 'zod';
 
 const calculatorSchema = z.object({
@@ -9,34 +10,87 @@ const calculatorSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  const startTime = Date.now();
+  const correlationId = generateCorrelationId();
+  const requestLogger = logger.forRequest(correlationId);
+  
+  const ip = request.headers.get('x-forwarded-for') || 
+             request.headers.get('x-real-ip') || 
+             '127.0.0.1';
+  
   try {
+    requestLogger.info('Calculator API request started', {
+      method: 'POST',
+      url: '/api/calculator',
+      ip,
+      userAgent: request.headers.get('user-agent'),
+    });
+
     const body = await request.json();
     const { industry, providers, patientsPerDay, location } =
       calculatorSchema.parse(body);
 
-    const calculation = await calculateROI({
+    requestLogger.debug('Calculator input validated', {
       industry,
       providers,
       patientsPerDay,
       location,
     });
 
+    const calculation = await calculateROI({
+      industry,
+      providers,
+      patientsPerDay,
+      location,
+    }, requestLogger);
+
     // Track calculation event
     await trackEvent('calculator_completed', {
       industry,
       result: calculation.monthlySavings,
+    }, requestLogger);
+
+    const duration = Date.now() - startTime;
+    logApiRequest('POST', '/api/calculator', 200, duration, { 
+      correlationId, 
+      ip,
+      industry,
+      monthlySavings: calculation.monthlySavings 
+    });
+
+    requestLogger.info('Calculator calculation completed', {
+      industry,
+      monthlySavings: calculation.monthlySavings,
+      yearlyProjection: calculation.yearlyProjection,
+      duration,
     });
 
     return NextResponse.json(calculation);
   } catch (error) {
+    const duration = Date.now() - startTime;
+    
     if (error instanceof z.ZodError) {
+      requestLogger.warn('Calculator validation failed', {
+        validationErrors: error.errors,
+        duration,
+      });
+      logApiRequest('POST', '/api/calculator', 400, duration, { 
+        correlationId, 
+        ip,
+        errorType: 'validation_error' 
+      });
       return NextResponse.json(
         { error: 'Invalid input data', details: error.errors },
         { status: 400 }
       );
     }
 
-    console.error('Calculator API error:', error);
+    logApiError('POST', '/api/calculator', error as Error, { 
+      correlationId, 
+      ip,
+      duration 
+    });
+    
     return NextResponse.json({ error: 'Calculation failed' }, { status: 500 });
   }
 }
@@ -46,7 +100,7 @@ async function calculateROI(params: {
   providers: number;
   patientsPerDay: number;
   location: string;
-}) {
+}, requestLogger: ReturnType<typeof logger.forRequest>) {
   const { industry, providers, patientsPerDay, location } = params;
 
   // Industry-specific multipliers
@@ -104,15 +158,34 @@ async function calculateROI(params: {
   };
 }
 
-async function trackEvent(event: string, properties: Record<string, unknown>) {
+async function trackEvent(
+  event: string, 
+  properties: Record<string, unknown>,
+  requestLogger: ReturnType<typeof logger.forRequest>
+) {
   // Send to analytics service
   try {
+    requestLogger.debug('Tracking calculator event', {
+      event,
+      properties,
+      eventType: 'calculator_analytics',
+    });
+
     await fetch('/api/analytics', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ event, properties }),
     });
+
+    requestLogger.debug('Calculator event tracked successfully', {
+      event,
+      trackingComplete: true,
+    });
   } catch (error) {
-    console.error('Failed to track event:', error);
+    requestLogger.error('Failed to track calculator event', error as Error, {
+      event,
+      properties,
+      errorType: 'analytics_tracking_error',
+    });
   }
 }

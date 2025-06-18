@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { logger, generateCorrelationId, logApiRequest, logApiError } from '@/lib/logger';
 import { z } from 'zod';
 
 // Define types based on our schemas
