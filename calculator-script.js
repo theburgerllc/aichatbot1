@@ -74,7 +74,7 @@ function initializeCalculatorHub() {
             showCalculator(industry);
             
             trackCalculatorEvent('calculator_selected', {
-                industry: industry,
+                industry,
                 timestamp: Date.now()
             });
         });
@@ -136,7 +136,7 @@ function setupIndustryCalculator(industry, calculationFunction) {
             // Track engagement
             userEngagement.inputChanges++;
             trackCalculatorEvent('calculator_input_changed', {
-                industry: industry,
+                industry,
                 input: e.target.id,
                 value: e.target.value,
                 engagement_score: userEngagement.inputChanges
@@ -177,7 +177,7 @@ function showCalculator(industry) {
     startEngagementTimer();
     
     trackCalculatorEvent('calculator_opened', {
-        industry: industry,
+        industry,
         timestamp: Date.now()
     });
 }
@@ -217,9 +217,9 @@ function calculateHealthcareROI() {
     userEngagement.resultsViewed = true;
     
     trackCalculatorEvent('healthcare_roi_calculated', {
-        providers: providers,
+        providers,
         patients_per_day: patientsPerDay,
-        location: location,
+        location,
         monthly_savings: monthlySavings,
         hours_saved: timeSavedHours
     });
@@ -298,7 +298,7 @@ function calculateEcommerceROI() {
     trackCalculatorEvent('ecommerce_roi_calculated', {
         monthly_visitors: monthlyVisitors,
         abandonment_rate: abandonmentRate * 100,
-        aov: aov,
+        aov,
         store_type: storeType,
         monthly_recovery: monthlyRecovery,
         recovered_carts: recoveredCarts
@@ -395,8 +395,8 @@ function updateGrowthChart(industry, leads, currentConv, improvedConv) {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        callback: function(value) {
-                            return value + '%';
+                        callback(value) {
+                            return `${value  }%`;
                         }
                     }
                 }
@@ -440,8 +440,8 @@ function updateRecoveryChart(industry, abandoned, recovered, revenue) {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        callback: function(value) {
-                            return '$' + value.toLocaleString();
+                        callback(value) {
+                            return `$${  value.toLocaleString()}`;
                         }
                     }
                 }
@@ -528,7 +528,7 @@ function showEmailCaptureForm(industry) {
         emailCapture.scrollIntoView({ behavior: 'smooth', block: 'center' });
         
         trackCalculatorEvent('email_capture_shown', {
-            industry: industry,
+            industry,
             input_changes: userEngagement.inputChanges,
             time_spent: userEngagement.timeSpent,
             trigger: userEngagement.inputChanges >= 3 ? 'interactions' : 'time'
@@ -562,7 +562,7 @@ function showCalculatorHub() {
 // Conversion Actions
 function startTrial(industry) {
     trackCalculatorEvent('trial_started_from_calculator', {
-        industry: industry,
+        industry,
         calculator_completion: userEngagement.resultsViewed,
         engagement_score: userEngagement.inputChanges
     });
@@ -570,7 +570,7 @@ function startTrial(industry) {
     // Redirect to trial with calculator data
     const params = new URLSearchParams({
         source: 'calculator',
-        industry: industry,
+        industry,
         calculator_completed: userEngagement.resultsViewed
     });
     
@@ -579,7 +579,7 @@ function startTrial(industry) {
 
 function scheduleConsultation(industry) {
     trackCalculatorEvent('consultation_scheduled_from_calculator', {
-        industry: industry,
+        industry,
         calculator_completion: userEngagement.resultsViewed,
         engagement_score: userEngagement.inputChanges
     });
@@ -594,8 +594,8 @@ function submitEmailCapture(event, industry) {
     const email = event.target.querySelector('input[type="email"]').value;
     
     trackCalculatorEvent('email_captured', {
-        industry: industry,
-        email: email,
+        industry,
+        email,
         time_to_capture: userEngagement.timeSpent,
         input_changes: userEngagement.inputChanges
     });

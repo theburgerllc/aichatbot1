@@ -1,7 +1,7 @@
 // CRO Dashboard JavaScript - Real-time Performance Monitoring
 
 // Dashboard state
-let dashboardData = {
+const dashboardData = {
     lastUpdated: Date.now(),
     autoRefresh: true,
     refreshInterval: 30000, // 30 seconds
@@ -265,7 +265,7 @@ function initializeFunnelChart() {
                 },
                 tooltip: {
                     callbacks: {
-                        label: function(context) {
+                        label(context) {
                             const total = dashboardData.realTimeData.pageViews;
                             const percentage = ((context.raw / total) * 100).toFixed(1);
                             return `${context.raw.toLocaleString()} (${percentage}%)`;
@@ -277,7 +277,7 @@ function initializeFunnelChart() {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        callback: function(value) {
+                        callback(value) {
                             return value.toLocaleString();
                         }
                     }

@@ -42,7 +42,7 @@ async function handleCreatePayment(data: any) {
     return NextResponse.json({
       success: true,
       payment: {
-        id: 'mock_payment_' + Date.now(),
+        id: `mock_payment_${  Date.now()}`,
         status: 'COMPLETED',
         amount: data.amount,
       },
@@ -67,7 +67,7 @@ async function handleCreateSubscription(data: any) {
     return NextResponse.json({
       success: true,
       subscription: {
-        id: 'mock_subscription_' + Date.now(),
+        id: `mock_subscription_${  Date.now()}`,
         status: 'ACTIVE',
         planId: data.planId,
       },

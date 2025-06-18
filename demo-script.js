@@ -3,11 +3,11 @@
 // Global demo state
 let currentDemo = null;
 let currentStep = 1;
-let totalSteps = 15;
+const totalSteps = 15;
 let demoStartTime = null;
 let stepStartTime = null;
 let userEngagementScore = 0;
-let autoAdvanceEnabled = true;
+const autoAdvanceEnabled = true;
 let viewerCountInterval;
 let urgencyCountdownInterval;
 
@@ -476,7 +476,7 @@ function initializeDemoHub() {
             startDemo(industry);
             
             trackDemoEvent('demo_selected', {
-                industry: industry,
+                industry,
                 format: getSelectedFormat(),
                 timestamp: Date.now()
             });
@@ -577,7 +577,7 @@ function startDemo(industry) {
     saveDemoProgress();
     
     trackDemoEvent('demo_started', {
-        industry: industry,
+        industry,
         timestamp: Date.now()
     });
 }
@@ -830,7 +830,7 @@ function addStepNavigationListeners(stepEl, step, stepNumber) {
                 handleConversionAction(action);
                 
                 trackDemoEvent('demo_conversion_cta', {
-                    action: action,
+                    action,
                     step: stepNumber,
                     intent: btn.className.includes('high') ? 'high' : 
                            btn.className.includes('medium') ? 'medium' : 'low'

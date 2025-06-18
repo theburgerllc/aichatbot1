@@ -211,8 +211,8 @@ function initializeCalculator() {
             result.innerHTML = `<strong>Monthly Savings: $${monthlySavings.toLocaleString()}</strong>`;
             
             trackEvent('calculator_result', {
-                leads: leads,
-                conversion: conversion,
+                leads,
+                conversion,
                 order_value: orderValue,
                 savings: monthlySavings,
                 industry: currentIndustry
@@ -321,7 +321,7 @@ function initializeNotifications() {
         const parts = notificationText.split(' just ');
         
         title.textContent = parts[0];
-        message.textContent = 'just ' + (parts[1] || 'took action');
+        message.textContent = `just ${  parts[1] || 'took action'}`;
         
         popup.classList.add('show');
         
@@ -516,8 +516,8 @@ function calculateFullROI() {
         document.getElementById('yearlyRoi').textContent = `$${yearlyRoi.toLocaleString()}`;
         
         trackEvent('full_calculator_result', {
-            visitors: visitors,
-            conversion: conversion,
+            visitors,
+            conversion,
             order_value: orderValue,
             support_hours: supportHours,
             monthly_roi: totalRoi,
@@ -540,7 +540,7 @@ function submitExitIntent(event) {
     const email = document.getElementById('exitIntentEmail').value;
     
     trackEvent('exit_intent_submit', {
-        email: email,
+        email,
         industry: currentIndustry,
         discount_claimed: true
     });
@@ -557,7 +557,7 @@ function startTrial() {
     });
     
     // Redirect to trial signup page
-    window.location.href = '/signup?industry=' + currentIndustry;
+    window.location.href = `/signup?industry=${  currentIndustry}`;
 }
 
 function closeNotification() {
@@ -632,7 +632,7 @@ function monitorPerformance() {
                 
                 // Alert if load time is over 2.5 seconds
                 if (loadTime > 2500) {
-                    console.warn('Page load time exceeded 2.5 seconds:', loadTime + 'ms');
+                    console.warn('Page load time exceeded 2.5 seconds:', `${loadTime  }ms`);
                 }
             }, 0);
         });

@@ -3,7 +3,7 @@
 
 // Global tracking state
 let trackingInitialized = false;
-let sessionData = {
+const sessionData = {
     startTime: Date.now(),
     pageViews: 0,
     industry: null,
@@ -82,7 +82,7 @@ function detectIndustry() {
     const hour = new Date().getHours();
     if (hour >= 9 && hour <= 17) {
         const industry = Math.random() > 0.5 ? 'healthcare' : 'legal';
-        trackEvent('industry_detected', { method: 'time_based', industry: industry });
+        trackEvent('industry_detected', { method: 'time_based', industry });
         return industry;
     }
     
@@ -110,7 +110,7 @@ function detectIndustry() {
         industry = 'legal';
     }
     
-    trackEvent('industry_detected', { method: 'weighted_random', industry: industry });
+    trackEvent('industry_detected', { method: 'weighted_random', industry });
     return industry;
 }
 
@@ -210,7 +210,7 @@ function getDeviceCategory() {
 
 // Session ID Generator
 function generateSessionId() {
-    return 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    return `sess_${  Date.now()  }_${  Math.random().toString(36).substr(2, 9)}`;
 }
 
 // Enhanced Event Tracking
@@ -244,7 +244,7 @@ function trackEvent(eventName, properties = {}) {
     sessionData.conversions.push({
         event: eventName,
         timestamp: Date.now(),
-        properties: properties
+        properties
     });
     
     console.log('📊 Event tracked:', eventName, eventData);
@@ -448,7 +448,7 @@ function personalizeExperience(qualification) {
     }
     
     trackEvent('experience_personalized', {
-        qualification: qualification,
+        qualification,
         engagement_score: sessionData.engagementScore,
         category: 'personalization'
     });

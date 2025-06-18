@@ -42,7 +42,7 @@ const TEST_DATA = {
     action: 'create_payment',
     amount: 10000, // $100.00 in cents
     sourceId: 'test_card_token',
-    idempotencyKey: 'test_' + Date.now()
+    idempotencyKey: `test_${  Date.now()}`
   }
 };
 
@@ -95,7 +95,7 @@ function makeRequest(url, options = {}) {
           resolve({
             status: res.statusCode,
             headers: res.headers,
-            data: data,
+            data,
             parseError: error.message
           });
         }
