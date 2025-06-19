@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Client, Environment } from 'squareup';
+import { Client, Environment } from 'square';
 import * as Sentry from '@sentry/nextjs';
 import { logger } from '@/lib/logger';
 
