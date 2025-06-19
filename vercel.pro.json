@@ -5,14 +5,14 @@
   "outputDirectory": ".next",
   "installCommand": "npm ci",
   "regions": ["iad1", "sfo1", "lhr1"],
-  "functions": {
-    "app/api/**/*.ts": {
-      "runtime": "nodejs20.x",
-      "maxDuration": 10,
-      "memory": 1024
-    }
-  },
-  "headers": [
+"functions": {
+"app/api/**/*.ts": {
+"runtime": "nodejs20.x",
+  "maxDuration": 10,
+  "memory": 1024
+}
+},
+"headers": [
     {
       "source": "/(.*)",
       "headers": [
